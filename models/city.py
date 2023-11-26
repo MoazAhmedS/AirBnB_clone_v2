@@ -1,21 +1,12 @@
 #!/usr/bin/python3
 """city class"""
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, ForeignKey, String
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, Integer, String
-from sqlalchemy import ForeignKey
-from sqlalchemy.orm import relationship
-from models.place import Place
 
 
 class City(BaseModel, Base):
-    """class for City
-    Attributes:
-        state_id: state id
-        name: name
+    """ 
     """
     __tablename__ = "cities"
     name = Column(String(128), nullable=False)
-    state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
-    places = relationship("Place", cascade='all, delete, delete-orphan',
-                          backref="cities")
+    state_id = Column(String(60), ForeignKey("states.id"), nullable=False)
